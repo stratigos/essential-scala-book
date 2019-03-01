@@ -2,7 +2,7 @@
  * Pattern matching with simple case classes
  * Ch3.5.3.1
  */
-case class Cats(name: String, color: String, food: String)
+case class Cat(name: String, color: String, food: String)
 
 object ChipShop {
   def willServe(cat: Cat): Boolean =
