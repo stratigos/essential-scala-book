@@ -52,3 +52,13 @@ object Film {
       film2.director
   }
 }
+
+/**
+ * Ch 3.4.5.3
+ * Case Class for Counter - basically the same thing!
+ * Note: `copy()` (for "free") vs `new Counter(count -1)`
+ */
+case class Counter(count: Int = 0) {
+  def dec = copy(count = count - 1)
+  def inc = copy(count = count + 1)
+}
