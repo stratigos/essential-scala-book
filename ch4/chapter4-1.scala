@@ -58,14 +58,36 @@ case class Circle(radius: Double) extends Shape {
   val area = math.Pi * radius * radius
 }
 
-case class Rectangle(height: Double, width: Double) extends Shape {
+/*
+  Since Rectangle and Square are quite similar, it stands that they could
+  inherit from a common type.
+  Commented below is an implementation of both, extending directly from Shape.
+  More commonly, the logic / relationships for such types will be expressed by
+  a common intermediate type, i.e., a Rectangular trait.
+ */
+// case class Rectangle(height: Double, width: Double) extends Shape {
+//   val sides = 4
+//   val perimeter = 2 * width + 2 * height
+//   val area = width * height
+// }
+
+// case class Square(size: Double) extends Shape {
+//   val sides = 4
+//   val perimeter = 4 * size
+//   val area = size * size
+// }
+
+trait Rectangular extends Shape {
+  def height: Double
+  def width: Double
   val sides = 4
-  val perimeter = 2 * width + 2 * height
-  val area = width * height
+  override val perimeter = 2 * width + 2 * height
+  override val area = width * height
 }
 
-case class Square(size: Double) extends Shape {
-  val sides = 4
-  val perimeter = 4 * size
-  val area = size * size
+case class Rectangle(height: Double, width: Double) extends Rectangular
+
+case class Square(size: Double) extends Rectangular {
+  val height = size
+  val width = size
 }
