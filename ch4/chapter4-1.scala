@@ -77,7 +77,7 @@ case class Circle(radius: Double) extends Shape {
 //   val area = size * size
 // }
 
-trait Rectangular extends Shape {
+sealed trait Rectangular extends Shape {
   def height: Double
   def width: Double
   val sides = 4
