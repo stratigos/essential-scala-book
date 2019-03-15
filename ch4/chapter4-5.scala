@@ -17,6 +17,9 @@ case object Yellow extends TraffickLight {
 
 /**
   * Now do the same thing with pattern matching 🎼
+  * The author wants you to believe this is the best approach, since it does
+  * not depend on external data, only one implementation is needed, and the
+  * structure of the state machine is more clear and cohesive.
   * Ch4.5.6.1
   */
 sealed trait TrafficLight {
