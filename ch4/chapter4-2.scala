@@ -57,8 +57,55 @@ sealed trait ColoredShape extends Shape {
 
 // We havent used _extractors_ yet in this book, so dont try inheriting from
 // the actual Color class 😉
-final case class ColorCircle(radius: Double, color: Color) extends Shape {
+final case class ColoredCircle(
+    radius: Double,
+    color: Color
+) extends ColoredShape {
   val sides = 1
   val perimeter = 2 * math.Pi * radius
   val area = math.Pi * radius * radius
+}
+
+sealed trait ColoredRectangular extends ColoredShape {
+  def height: Double
+  def width: Double
+  val sides = 4
+  override val perimeter = 2 * width + 2 * height
+  override val area = width * height
+}
+
+case class ColoredRectangle(
+    height: Double,
+    width: Double,
+    color: Color
+) extends ColoredRectangular
+
+case class ColoredSquare(
+    size: Double,
+    color: Color
+) extends ColoredRectangular {
+  val height = size
+  val width = size
+}
+
+object ColoredDraw {
+  def apply(colored_shape: ColoredShape): String =
+    colored_shape match {
+      case ColoredCircle(radius, color) =>
+        s"A ${ColoredDraw(color)} circle of radius ${radius}cm"
+      case ColoredSquare(size, color) =>
+        s"A ${ColoredDraw(color)} square of size ${size}cm"
+      case ColoredRectangle(width, height, color) =>
+        s"A ${ColoredDraw(color)} rectangle of width ${width}cm and height ${height}cm"
+      case _ =>
+        s"Wtf did you stick in here?"
+    }
+
+  def apply(color: Color): String =
+    color match {
+      case Red    => "red"
+      case Yellow => "yellow"
+      case Pink   => "pink"
+      case color  => if (color.isLight) "light" else "dark"
+    }
 }
