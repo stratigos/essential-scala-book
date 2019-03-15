@@ -109,3 +109,28 @@ object ColoredDraw {
       case color  => if (color.isLight) "light" else "dark"
     }
 }
+
+/**
+  * Use types to protect the application against bugs. 🐛
+  * 4.2.2.3
+  */
+sealed trait DivisionResult {}
+
+final case class Finite(value: Int) extends DivisionResult {}
+
+case object Infinite extends DivisionResult {}
+
+object divide {
+  def apply(dividend: Int, divisor: Int): DivisionResult =
+    if (divisor == 0) {
+      Infinite
+    } else {
+      Finite(dividend / divisor)
+    }
+}
+
+// Use it
+divide(1, 0) match {
+  case Finite(value) => s"It's finite: ${value}"
+  case Infinite => s"It's infinite (you can not divide by zero)"
+}
