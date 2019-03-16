@@ -33,3 +33,13 @@ sealed trait TrafficLight {
 case object Red extends TrafficLight
 case object Green extends TrafficLight
 case object Yellow extends TrafficLight
+
+/**
+  * Demonstrate methods with unusual shapes! 📛
+  * - This commit represents the implementation of the framework
+  * Ch4.5.6.2
+  */
+object Calculator {
+  def +(calc: Calculation, operand: Int): Calculation = ???
+  def -(calc: Calculation, operand: Int): Calculation = ???
+}
