@@ -66,3 +66,13 @@ object Calculator {
       case Failure(reason) => Failure(reason)
     }
 }
+
+/**
+  * Model sending of emails to users.
+  * Between implementing via polymorphism on the earlier Visitor trait, or
+  * pattern matching on an EmailService object, the latter is preferred due to
+  * the fact that a non auth'd user will never need email services (thus the
+  * abstraction lives in its own encapsulation/abstraction).
+  *
+  */
+// No actual code, just go with the author's opinion 😁
