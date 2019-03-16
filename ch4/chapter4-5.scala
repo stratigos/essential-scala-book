@@ -48,12 +48,12 @@ case object Yellow extends TrafficLight
 object Calculator {
   def +(calc: Calculation, operand: Int): Calculation =
     calc match {
-      case Success(result) => ???
-      case Failure(reason) => ??
+      case Success(result) => Success(result + operand)
+      case Failure(reason) => Failure(reason)
     }
   def -(calc: Calculation, operand: Int): Calculation =
     calc match {
-      case Success(result) => ???
-      case Failure(reason) => ???
+      case Success(result) => Success(result - operand)
+      case Failure(reason) => Failure(reason)
     }
 }
