@@ -36,10 +36,24 @@ case object Yellow extends TrafficLight
 
 /**
   * Demonstrate methods with unusual shapes! 📛
-  * - This commit represents the implementation of the framework
+  * This uses the structural recursion pattern, but is not yet a full
+  * implementation.
   * Ch4.5.6.2
   */
+/***************************************************************
+  sealed trait Calculation
+  final case class Success(result: Int) extends Calculation
+  final case class Failure(reason: String) extends Calculation
+****************************************************************/
 object Calculator {
-  def +(calc: Calculation, operand: Int): Calculation = ???
-  def -(calc: Calculation, operand: Int): Calculation = ???
+  def +(calc: Calculation, operand: Int): Calculation =
+    calc match {
+      case Success(result) => ???
+      case Failure(reason) => ??
+    }
+  def -(calc: Calculation, operand: Int): Calculation =
+    calc match {
+      case Success(result) => ???
+      case Failure(reason) => ???
+    }
 }
