@@ -27,9 +27,52 @@ sealed trait IntList {
 case object End extends IntList
 final case class Pair(head: Int, tail: IntList) extends IntList
 
-/*
- * Implement a B-Tree as an algebraic datatype. 🔢
- */
+/**
+  * Implement a B-Tree as an algebraic datatype. 🌳
+  * Implement methods such as `sum` and `double` on the Tree using pattern
+  * matching.
+  * Ch4.6.3.2
+  */
 sealed trait Tree
 final case class Node(l: Tree, r: Tree) extends Tree
 final case class Leaf(elt: Int) extends Tree
+
+object TreeCalculations {
+  def sum(tree: Tree): Int =
+    tree match {
+      case Leaf(value) => value
+      case Node(l, r)  => sum(l) + sum(r)
+    }
+
+  def double(tree: Tree): Tree =
+    tree match {
+      case Leaf(value) => Lead(value * 2)
+      case Node(l, r)  => Node(double(l), double(r))
+    }
+}
+
+/**
+  * Implement a B-Tree as an algebraic datatype. 🌴
+  * Implement methods such as `sum` and `double` on the Tree using polymorphism
+  * matching.
+  * Ch4.6.3.2
+  */
+sealed trait PolymorphicTree {
+  def sum: Int
+  def double: PolymorphicTree
+}
+
+final case class PolyNode(
+    left: PolymorphicTree,
+    right: PolymorphicTree
+) extends PolymorphicTree {
+  def sum: Int = left.sum + right.sum
+
+  def double: PolymorphicTree = PolyNode(left.double, right.double)
+}
+
+final case class PolyLeaf(value: Int) extends PolymorphicTree {
+  def sum: Int = value
+
+  def double: PolymorphicTree = PolyLeaf(value * 2)
+}
