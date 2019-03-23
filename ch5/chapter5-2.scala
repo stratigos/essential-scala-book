@@ -35,8 +35,8 @@ final case class Pair(head: Int, tail: IntList) extends IntList
 sealed trait GenIntList {
   def fold[A](end: A, f: (Int, A) => A): A =
     this match {
-      case End              => end
-      case Pair(head, tail) => f(head, tail.fold(end, f))
+      case GenEnd              => end
+      case GenPair(head, tail) => f(head, tail.fold(end, f))
     }
 
   def length: Int =
@@ -49,7 +49,7 @@ sealed trait GenIntList {
     fold[Int](0, (head, tail) => head + tail)
 
   def double: GenIntList =
-    fold[GenIntList](End, (head, tail) => GenPair(head * 2, tail))
+    fold[GenIntList](GenEnd, (head, tail) => GenPair(head * 2, tail))
 }
 
 case object GenEnd extends GenIntList
