@@ -34,7 +34,7 @@ case class Full[A](value: A) extends Maybe[A]
 case class Empty[A]() extends Maybe[A]
 
 /**
-  * Implement `fold()` for a `Maybe[A]`
+  * Implement `fold()` for a `Maybe[A]` 📁
   *
   * Ch5.4.6.2
   */
@@ -45,5 +45,22 @@ sealed trait FoldingMaybe[A] {
       case Empty() => empty
     }
 }
+
 final case class FoldingFull[A](value: A) extends FoldingMaybe[A]
 final case class FoldingEmpty[A]() extends FoldingMaybe[A]
+
+/**
+  * Implement 'fold()' for `Sum[A, B]` 📂
+  *
+  * Ch5.4.6.3
+  */
+sealed trait FoldingSum[A, B] {
+  def fold[C](left: A => C, right: B => C): C =
+    this match {
+      case Left(a)  => left(a)
+      case Right(b) => right(b)
+    }
+}
+
+case class FoldingLeft[A, B](value: A) extends FoldingSum[A, B]
+case class FoldingRight[A, B](value: B) extends FoldingSum[A, B]
