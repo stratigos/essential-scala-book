@@ -17,5 +17,18 @@ case class SimplePair[A, B](one: A, two: B)
   */
 trait Sum[A, B]
 
-case class Left[A, B](value: A) extends Sum
-case class Right[A, B](value: B) extends Sum
+case class Left[A, B](value: A) extends Sum[A, B]
+case class Right[A, B](value: B) extends Sum[A, B]
+
+/**
+  * Implement a trait Maybe[A] with two subtypes, one of which has no value.
+  * Example usage:
+  *  `val perhaps: Maybe[Int] = Empty[Int]`
+  *  `val perhaps: Maybe[Int] = Full(1)`
+  *
+  * Ch5.4.4.1
+  */
+trait Maybe[A]
+
+case class Full[A](value: A) extends Maybe[A]
+case class Empty[A]() extends Maybe[A]
