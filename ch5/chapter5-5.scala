@@ -33,3 +33,17 @@ sealed trait FlatMapableMaybe[A] {
 
 final case class FlatMapableFull[A](value: A) extends FlatMapableMaybe[A]
 final case class FlatMapableEmpty[A]() extends FlatMapableMaybe[A]
+
+/**
+  * Simple exercize: Given this list: ⛓
+  *   `val list = List(1, 2, 3)`
+  * ...return a List[Int] containing both all the elements and their negation.
+  *
+  * Ch5.5.4.3
+  */
+object ListWithFlatMapExample {
+  val list = List(1, 2, 3)
+
+  def useFlatMapToZipNegationsIntoListOfInts(): List[Int] =
+    list.flatMap(x => List[Int](x, x * -1))
+}
