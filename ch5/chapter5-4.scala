@@ -41,8 +41,8 @@ case class Empty[A]() extends Maybe[A]
 sealed trait FoldingMaybe[A] {
   def fold[B](full: A => B, empty: B): B =
     this match {
-      case Full(v) => full(v)
-      case Empty() => empty
+      case FoldingFull(v) => full(v)
+      case FoldingEmpty() => empty
     }
 }
 
